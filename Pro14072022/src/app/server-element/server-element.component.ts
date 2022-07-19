@@ -1,4 +1,4 @@
-import { Component, OnInit,Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit,Input, ViewEncapsulation, ContentChild, ElementRef, AfterContentInit } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -6,12 +6,18 @@ import { Component, OnInit,Input, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./server-element.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class ServerElementComponent implements OnInit {
+export class ServerElementComponent implements OnInit,AfterContentInit {
   @Input('srvElement') element: {type: string, name: string, content: string };
+  @ContentChild('contentparagrapg') paragraph: ElementRef;
 
   constructor() { }
 
-  ngOnInit(): void {
+  ngOnInit(){
+    console.log('Text content of paragraph' + this.paragraph.nativeElement.textContent)
+  }
+
+  ngAfterContentInit(){
+    console.log('Text content of paragraph' + this.paragraph.nativeElement.textContent)
   }
 
 }
